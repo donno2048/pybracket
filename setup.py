@@ -23,7 +23,7 @@ setup(
     license='MIT',
     author='Elisha Hollander',
     author_email='just4now666666@gmail.com',
-    description="Add brackets and good semicolon to Python",
+    description="Add brackets and good semicolons to Python",
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     url='https://github.com/donno2048/pybracket',
@@ -38,5 +38,6 @@ setup(
         'egg_info': EggInfo
     },
     packages=find_packages(),
+    entry_points={ 'console_scripts': [ 'pybracket=pybracket.__main__:main' ] },
     zip_safe=False
 )
