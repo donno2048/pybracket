@@ -6,14 +6,30 @@ Add brackets and good semicolons to Python
 
 ### From PyPI
 
+#### On Linux
+
 ```sh
-pip3 install pybracket
+sudo pip3 install pybracket
+```
+
+#### On Windows
+
+```bat
+pip install pybracket
 ```
 
 ### From GitHub
 
+#### On Linux
+
 ```sh
-pip3 install git+https://github.com/donno2048/pybracket
+sudo pip3 install git+https://github.com/donno2048/pybracket
+```
+
+#### On Windows
+
+```bat
+pip install git+https://github.com/donno2048/pybracket
 ```
 
 ## Usage
