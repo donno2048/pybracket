@@ -1,4 +1,4 @@
-from codecs import register, CodecInfo
+from codecs import register, CodecInfo, BufferedIncrementalDecoder
 from encodings import search_function
 from functools import reduce
 from typing import Generator, Tuple
@@ -46,8 +46,12 @@ def transform(text: str, indent_level: int = 0) -> str:
                 return output + transform(text[i + 1:], indent_level)
         output += text[i] # slow but doesn't matter
     return output
-def decoder(text: memoryview) -> Tuple[str, int]:
-    output = transform(text.tobytes().decode()).lstrip()
+def decoder(text: memoryview, errors='strict') -> Tuple[str, int]:
+    output = transform(text.tobytes().decode('utf8', errors=errors)).lstrip()
     return output, len(output)
+class IncrementalDecoder(BufferedIncrementalDecoder):
+    def _buffer_decode(self, input, errors, final):
+        return decoder(input, errors) if final else ('', 0)
 def main():
-    register(lambda i: CodecInfo(name='brackets', encode=search_function('utf8').encode, decode=decoder) if i == 'brackets' else None)
+    utf8 = search_function('utf8')
+    register(lambda i: CodecInfo(name='brackets', encode=utf8.encode, decode=decoder, incrementalencoder=utf8.incrementalencoder, incrementaldecoder=IncrementalDecoder) if i == 'brackets' else None)
