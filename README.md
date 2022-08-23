@@ -1,37 +1,21 @@
-# nothingness
+# pybracket
 
-This is nothing, just a template for PyPI packages
+Add brackets and good semicolon to Python
 
 ## Installation
 
 ### From PyPI
 
 ```sh
-pip3 install nothingness
+pip3 install pybracket
 ```
 
 ### From GitHub
 
 ```sh
-pip3 install git+https://github.com/donno2048/nothingness
+pip3 install git+https://github.com/donno2048/pybracket
 ```
 
 ## Usage
 
-### Import fun from \_\_init__.py
-
-```py
-from nothingness import fun
-```
-
-### Run \_\_main__.py
-
-```sh
-python3 -m nothingness
-```
-
-### Run main from \_\_main__.py
-
-```sh
-nothingness
-```
+See [example.py](./example.py) (no need for anything except just running `python3 example.py`)
