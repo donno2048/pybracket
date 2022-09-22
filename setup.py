@@ -19,7 +19,7 @@ class EggInfo(egg_info):
         write()
 setup(
     name='pybracket',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='Elisha Hollander',
     author_email='just4now666666@gmail.com',
