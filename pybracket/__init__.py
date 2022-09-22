@@ -2,6 +2,7 @@ from codecs import register, CodecInfo, BufferedIncrementalDecoder
 from encodings import search_function
 from functools import reduce
 from typing import Generator, Tuple
+utf8 = search_function('utf8')
 def get_strings(text: str) -> Generator:
     # I've spent around one hour creating and modifying a regex to match that then I just made this function after it didn't work
     flag_quote, flag_double_quote, start = False, False, 0
@@ -47,11 +48,10 @@ def transform(text: str, indent_level: int = 0) -> str:
         output += text[i] # slow but doesn't matter
     return output
 def decoder(text: memoryview, errors='strict') -> Tuple[str, int]:
-    output = transform(text.tobytes().decode('utf8', errors=errors)).lstrip()
+    output = transform(utf8.decode(text, errors=errors)[0]).lstrip()
     return output, len(output)
 class IncrementalDecoder(BufferedIncrementalDecoder):
     def _buffer_decode(self, input, errors, final):
         return decoder(input, errors) if final else ('', 0)
 def main():
-    utf8 = search_function('utf8')
     register(lambda i: CodecInfo(name='brackets', encode=utf8.encode, decode=decoder, incrementalencoder=utf8.incrementalencoder, incrementaldecoder=IncrementalDecoder) if i == 'brackets' else None)
